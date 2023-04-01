@@ -19,8 +19,10 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
+import { FiShoppingCart } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
-const Links = ["Dashboard", "Projects", "Team"];
+const Links = [];
 
 export const NavLink = ({ children }) => {
   return (
@@ -40,11 +42,17 @@ export const NavLink = ({ children }) => {
 };
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
+      <Box
+        bg={useColorModeValue("gray.100", "gray.900")}
+        px={4}
+        bgGradient="linear(to-r, #141e30, #243b55,blue.600)"
+        fontWeight="semibold"
+      >
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <IconButton
             size={"md"}
@@ -52,9 +60,14 @@ const Navbar = () => {
             aria-label={"Open Menu"}
             display={{ md: "none" }}
             onClick={isOpen ? onClose : onOpen}
+            background="#243b55"
+            color="white"
+            _hover={{ background: "#243b55", color: "#ffffff" }}
           />
-          <HStack spacing={8} alignItems={"center"}>
-            <Box>Logo</Box>
+          <HStack spacing={8} alignItems={"center"} color="white">
+            <Box onClick={() => navigate("/")} cursor={"pointer"}>
+              ECOMMERCE PROJECT
+            </Box>
             <HStack
               as={"nav"}
               spacing={4}
@@ -67,8 +80,26 @@ const Navbar = () => {
           </HStack>
 
           <Flex alignItems={"center"}>
-            <Button onClick={toggleColorMode} mr="4">
+            <Button
+              onClick={toggleColorMode}
+              mr="4"
+              _hover={{ background: "#243b55", color: "#ffffff" }}
+              colorScheme="primary"
+              bgGradient="linear(to-r, #141e30, #243b55, blue.600)"
+              color="white"
+              variant="solid"
+            >
               {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+            </Button>
+            <Button
+              mr="4"
+              _hover={{ background: "#243b55", color: "#ffffff" }}
+              colorScheme="primary"
+              bgGradient="linear(to-r, #141e30, #243b55, blue.600)"
+              color="white"
+              variant="solid"
+            >
+              <FiShoppingCart />
             </Button>
             <Menu>
               <MenuButton
@@ -97,16 +128,16 @@ const Navbar = () => {
 
         {isOpen ? (
           <Box pb={4} display={{ md: "none" }}>
-            <Stack as={"nav"} spacing={4}>
+            <Stack as={"nav"} spacing={4} color="white">
               {Links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
+                <NavLink key={link} color="white">
+                  {link}
+                </NavLink>
               ))}
             </Stack>
           </Box>
         ) : null}
       </Box>
-
-      <Box p={4}>Main Content Here</Box>
     </>
   );
 };
