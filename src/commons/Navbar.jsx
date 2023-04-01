@@ -20,6 +20,7 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { FiShoppingCart } from "react-icons/fi";
+import { AiOutlineLogin, AiOutlineShoppingCart } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 
 const Links = [];
@@ -99,9 +100,26 @@ const Navbar = () => {
               color="white"
               variant="solid"
             >
-              <FiShoppingCart />
+              <AiOutlineShoppingCart size={40} />
             </Button>
-            <Menu>
+            <Button
+              w={"full"}
+              _hover={{
+                boxShadow: "lg",
+                bgGradient: "linear(to-r, blue.600, #243b55, #141e30)",
+                color: "#ffffff",
+              }}
+              colorScheme="primary"
+              bgGradient="linear(to-r, #141e30, #243b55, blue.600)"
+              color="white"
+              variant="solid"
+              onClick={() => navigate("/signin")}
+            >
+              SIGN IN &nbsp;&nbsp;
+              <AiOutlineLogin />
+            </Button>
+
+            {/* <Menu>
               <MenuButton
                 as={Button}
                 rounded={"full"}
@@ -122,7 +140,7 @@ const Navbar = () => {
                 <MenuDivider />
                 <MenuItem>Link 3</MenuItem>
               </MenuList>
-            </Menu>
+            </Menu> */}
           </Flex>
         </Flex>
 
